@@ -108,6 +108,9 @@
     border: none;
     visibility: none;
 }
+button[disabled]{
+  opacity: 0.5;
+}
 @media screen and (min-width: 700px) {
   .signUp-container {
     display: grid;

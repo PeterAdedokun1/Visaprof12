@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/signUp.css";
 import img from "../images/SignImg.png";
 import google from "../images/google.png";
@@ -16,13 +16,22 @@ import { TiTimes } from "react-icons/ti";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 
+
 const SignUp = () => {
   const [type, setType] = useState("password");
   const [icon, setIcon] = useState(eyeOff);
+  const [name, setName] = useState("")
+  const [password, setPassword] = useState("")
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState(false);
 
-  const [phone , setPhone] = useState("")
+  const [phone, setPhone] = useState("");
+
+  const [error, setError] = useState(false)
+ 
+  let value = name.length && password.length && email.length
+
+  
 
   const emailValidation = (e) => {
     let pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
@@ -44,6 +53,13 @@ const SignUp = () => {
       setType("password");
     }
   };
+
+  
+  useEffect(() => {
+    setTimeout(() => {
+      setError(false)
+    },5000)
+  })
   return (
     <div className="sign-up-container">
       <div className="signIn-img">
@@ -61,9 +77,10 @@ const SignUp = () => {
           </div>
 
           <div className="signUp-container">
-            <input type="text" placeholder="First name" />
-            <input type="text" placeholder="Last name" />
+            <input type="text" placeholder="First name" value={name} onChange={(e) => setName(e.target.value) } />
+            <input type="text" placeholder="Last name"  />
             <div className="input-email-field">
+              {error && <p>input email</p>}
               <input
                 type="email"
                 placeholder="Email address"
@@ -99,7 +116,7 @@ const SignUp = () => {
               />
             </div>
             <div className="password-signUP">
-              <input type={type} placeholder="Password" />
+              <input type={type} placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value) } />
               <span onClick={handleToggle}>
                 <Icon icon={icon}></Icon>
               </span>
@@ -121,8 +138,8 @@ const SignUp = () => {
 
         <div className="form-button-container">
           <div>
-            <Link to="/">
-              <button>Sign In</button>
+            <Link to="/" >
+              <button disabled={value == 0 ? true : false}>Sign Up</button>
             </Link>
           </div>
           <div>
