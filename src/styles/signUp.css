@@ -1,0 +1,127 @@
+.sign-up-container {
+  display: flex;
+  text-align: left;
+  height: 90vh;
+}
+
+.signUp-div-container{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    margin: 0 auto;
+}
+.signUp-form-container p:nth-child(1) {
+  margin-bottom: 40px;
+  font-size: 14px;
+}
+
+.signUp-container {
+  margin-left: 0px;
+}
+.signUp-container input {
+  border: 1px solid #d19439;
+  background-color: rgba(209, 148, 57, 0.1);
+  outline: none;
+  margin-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 25px;
+  width: 900px;
+  height: 40px;
+  border-radius: 5px;
+}
+.signUp-text .text1 {
+  font-size: 14px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  color: #757575;
+}
+.signUp-text .text2 {
+  font-weight: 700;
+}
+.signUp-agent {
+  display: flex;
+  margin-bottom: 40px;
+}
+.signUp-agent a {
+  text-decoration: none;
+  font-size: 14px;
+  color: #d19439;
+  margin-left: 10px;
+}
+.sign-up-container {
+  text-align: left;
+}
+.signUp-container input {
+  width: 100%;
+  display: block;
+  text-align: left;
+}
+.password-signUP {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  border: 1px solid #d19439;
+  background-color: rgba(209, 148, 57, 0.1);
+  height: 40px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+.password-signUP input {
+  border: none;
+  background: transparent;
+}
+.password-signUP span {
+  margin-top: 10px;
+  margin-right: 20px;
+}
+
+/* email validation */
+.input-email-field {
+  position: relative;
+}
+
+.input-email-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-content: center;
+}
+.fill-color {
+  color: #bdbdbd;
+}
+.error-color {
+  color: #bdbdbd;
+}
+
+.phone-input-container{
+    /* width: 500px; */
+    height: 35px;
+    border: none;
+    border: 1px solid #d19439;
+  background-color: rgba(209, 148, 57, 0.1);
+}
+.phone-input{
+    border: none;
+    visibility: none;
+}
+@media screen and (min-width: 700px) {
+  .signUp-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 30px;
+    
+  }
+  .signUp-div-container{
+    margin: 0 auto;
+  }      
+}
+
+@media screen and (min-width: 1200px) {
+    .signUp-div-container{
+        margin: 0;
+    }
+}
