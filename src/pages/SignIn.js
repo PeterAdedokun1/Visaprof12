@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import "../styles/SignIn.css";
 import { Link } from "react-router-dom";
 import { Icon } from "react-icons-kit";
@@ -7,9 +9,24 @@ import { eye } from "react-icons-kit/feather/eye";
 //images
 import google from "../images/google.png";
 import img from "../images/SignImg.png";
-const SignIn = () => {
+
+const SignIn = ({ setUser }) => {
+  const navigate = useNavigate();
+
   const [type, setType] = useState("password");
   const [icon, setIcon] = useState(eyeOff);
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+    if (!email || !password) {
+      return;
+    }
+    setUser({ email: email, password: password });
+    navigate("/home");
+  };
 
   const handleToggle = () => {
     if (type == "password") {
@@ -31,13 +48,23 @@ const SignIn = () => {
           <p className="form-Text">We're always excited to have you back</p>
         </div>
         <form className="signIn-form">
+
           <input
             type="email"
             placeholder="Email address"
             className="input-text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
+
+
           <div className="password-form">
-            <input type={type} placeholder="Password" />
+            <input
+              type={type}
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
             <span onClick={handleToggle}>
               <Icon icon={icon}></Icon>
             </span>
@@ -50,9 +77,7 @@ const SignIn = () => {
 
           <div className="form-button-container">
             <div>
-              <Link to="/home">
-                <button>Sign In</button>
-              </Link>
+              <button onClick={handleClick}>Sign In</button>
             </div>
             <div>
               <p>or sign in with </p>
