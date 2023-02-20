@@ -1,0 +1,35 @@
+.destination-container {
+  max-width: 1100px;
+  margin: 4rem auto 0;
+  padding: 1rem;
+}
+
+.single-destination {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0rem;
+  max-width: 300px;
+  margin: 0 auto;
+}
+.single-destination img {
+  width: 100%;
+  margin: 0;
+}
+
+.destination-footer {
+  padding: 1rem;
+  width: 100%;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  color: white;
+  margin: 0;
+  text-align: center;
+  font-weight: bold;
+}
+.destination-footer.darkblue {
+  background-color: #162e40;
+}
+.destination-footer.yellow {
+  background-color: #d19439;
+}

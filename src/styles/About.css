@@ -1,0 +1,59 @@
+.about-container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 10rem 1rem 1rem;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+.about-flex-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 1rem;
+}
+.about-flex-container > * {
+  flex: 1;
+}
+.about-image {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  align-items: center;
+}
+.main-image {
+  z-index: 3;
+  max-width: 300px;
+}
+.doodle {
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  top: 50%;
+  right: -60px;
+  transform: translateY(-50%);
+  z-index: 0;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+.about-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.about-content h1 {
+  font-size: 1.5rem;
+}
+.about-content h1 span {
+  color: #d19439;
+}
+
+@media screen and (max-width: 750px) {
+  .about-flex-container {
+    flex-direction: column;
+  }
+  .about-image {
+    overflow-x: hidden;
+  }
+}
