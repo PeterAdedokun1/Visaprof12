@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
@@ -11,16 +11,9 @@ function App() {
   const [user, setUser] = useState(null);
   return (
     <Routes>
-      <Route path="/" element={<SignIn setUser={setUser} />}  />
+      <Route path="/" element={<SignIn setUser={setUser} />} />
       <Route path="sign-up" element={<SignUp />} />
-      <Route
-        path="home"
-        element={
-          <ProtectedRoute user={user}>
-            <Home user={user} />
-          </ProtectedRoute>
-        }
-      />
+      <Route path="home" element={<Home />} />
     </Routes>
   );
 }
