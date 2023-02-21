@@ -3,6 +3,7 @@ import "../../styles/Navbar.css";
 import logo from "../../images/logo.png";
 import { MainButton, OutlineButton } from "../UI/Buttons";
 import { Squash } from "hamburger-react";
+import { Link } from "react-router-dom";
 
 const navlinks = [
   { href: "", text: "Agent Information" },
@@ -28,9 +29,13 @@ const Navbar = () => {
           );
         })}
         <div className="links-button">
-          <OutlineButton text={"Sign in"} />
+          <Link to="/">
+            <OutlineButton text={"Sign in"} />
+          </Link>
 
-          <MainButton text={"Sign up"} />
+          <Link to="/sign-up">
+            <MainButton text={"Sign up"} />
+          </Link>
         </div>
       </ul>
       <div className="buttons-container">

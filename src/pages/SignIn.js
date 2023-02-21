@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { auth, provider } from "./config";
-import { signInWithPopup } from "firebase/auth";
 import "../styles/SignIn.css";
 import { Link } from "react-router-dom";
 import { Icon } from "react-icons-kit";
@@ -46,12 +44,7 @@ const SignIn = () => {
       setType("password");
     }
   };
-  const handleSignIn = () => {
-    signInWithPopup(auth, provider).then((data) => {
-      setValue(data.user.email);
-      localStorage.setItem("email", data.user.email);
-    });
-  };
+
   useEffect(() => {
     setValue(localStorage.getItem("email"));
   });
@@ -107,7 +100,7 @@ const SignIn = () => {
               <p>or sign in with </p>
             </div>
           
-              <div className="google" onClick={handleSignIn}>
+              <div className="google">
                 <img src={google} alt="" />
               </div>
             
