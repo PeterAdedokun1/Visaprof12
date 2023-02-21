@@ -22,25 +22,30 @@ const footerLinks = [
 
 const Footer = () => {
   return (
-    <footer className="footer-container">
-      <div className="socials-container">
-        {socials.map((social, index) => {
-          return <img src={social.icon} alt="" loading="lazy" />;
+    <>
+      <footer className="footer-container">
+        <div className="socials-container">
+          {socials.map((social, index) => {
+            return <img src={social.icon} alt="" loading="lazy" key={index} />;
+          })}
+        </div>
+        {footerLinks.map((link, index) => {
+          return (
+            <article key={index} className="footer-link">
+              <h1>{link.title}</h1>
+              <ul>
+                {link.links.map((href, index) => {
+                  return <li key={index}>{href}</li>;
+                })}
+              </ul>
+            </article>
+          );
         })}
-      </div>
-      {footerLinks.map((link, index) => {
-        return (
-          <article key={index} className="footer-link">
-            <h1>{link.title}</h1>
-            <ul>
-              {link.links.map((href, index) => {
-                return <li key={index}>{href}</li>;
-              })}
-            </ul>
-          </article>
-        );
-      })}
-    </footer>
+      </footer>
+      <p className="copyright">
+        &copy; 2022 VISAPROF Visa processing firm. All rights reserved
+      </p>
+    </>
   );
 };
 
