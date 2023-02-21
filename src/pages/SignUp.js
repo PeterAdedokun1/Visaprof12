@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/signUp.css";
 import img from "../images/SignImg.png";
 import google from "../images/google.png";
@@ -20,18 +21,18 @@ import "react-phone-input-2/lib/style.css";
 const SignUp = () => {
   const [type, setType] = useState("password");
   const [icon, setIcon] = useState(eyeOff);
-  const [name, setName] = useState("")
+  const [firstName, setFirstName] = useState("")
+  const [lastName, setLastName] = useState("")
   const [password, setPassword] = useState("")
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState(false);
 
   const [phone, setPhone] = useState("");
-
-  const [error, setError] = useState(false)
+const [error, setError] = useState(false)
  
-  let value = name.length && password.length && email.length
+  let value = firstName.length && lastName.length && password.length && email.length
 
-  
+  const navigate = useNavigate()
 
   const emailValidation = (e) => {
     let pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
@@ -44,22 +45,26 @@ const SignUp = () => {
     }
   };
 
-  const handleToggle = () => {
-    if (type == "password") {
-      setIcon(eye);
-      setType("text");
-    } else {
-      setIcon(eyeOff);
-      setType("password");
-    }
-  };
+    
 
+  const handleClick = async () => {
+    let item = { firstName, lastName, phone, email, password };
+    let response = await fetch("http://localhost:3001/api/v1/users'", {
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json",
+        " Accept": "application/json",
+      },
+      body: JSON.stringify(item),
+    });
+
+    response = await response.json();
+    console.log(response); 
+    localStorage.setItem("user-info", JSON.stringify(response))
+    // navigate("/")
+  }
   
-  useEffect(() => {
-    setTimeout(() => {
-      setError(false)
-    },5000)
-  })
   return (
     <div className="sign-up-container">
       <div className="signIn-img">
@@ -77,10 +82,19 @@ const SignUp = () => {
           </div>
 
           <div className="signUp-container">
-            <input type="text" placeholder="First name" value={name} onChange={(e) => setName(e.target.value) } />
-            <input type="text" placeholder="Last name"  />
+            <input
+              type="text"
+              placeholder="First name"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+            />
+            <input
+              type="text"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              placeholder="Last name"
+            />
             <div className="input-email-field">
-              {error && <p>input email</p>}
               <input
                 type="email"
                 placeholder="Email address"
@@ -116,16 +130,15 @@ const SignUp = () => {
               />
             </div>
             <div className="password-signUP">
-              <input type={type} placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value) } />
-              <span onClick={handleToggle}>
-                <Icon icon={icon}></Icon>
-              </span>
+              <input
+                type={type}
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
             </div>
             <div className="password-signUP">
               <input type={type} placeholder="Confirm Password" />
-              <span onClick={handleToggle}>
-                <Icon icon={icon}></Icon>
-              </span>
             </div>
           </div>
           <div className="form-checkbox" style={{ marginTop: "50px" }}>
@@ -138,8 +151,13 @@ const SignUp = () => {
 
         <div className="form-button-container">
           <div>
-            <Link to="/" >
-              <button disabled={value == 0 ? true : false}>Sign Up</button>
+            <Link to="/">
+              <button
+                disabled={value == 0 ? true : false}
+                onClick={handleClick}
+              >
+                Sign Up
+              </button>
             </Link>
           </div>
           <div>
