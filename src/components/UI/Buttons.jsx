@@ -1,5 +1,6 @@
 import React from "react";
 import "../../styles/Button.css";
+import { Link } from "react-router-dom";
 const MainButton = ({ text }) => {
   return (
     <Link>
