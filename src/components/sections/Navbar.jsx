@@ -3,6 +3,7 @@ import "../../styles/Navbar.css";
 import logo from "../../images/logo.png";
 import { MainButton, OutlineButton } from "../UI/Buttons";
 import { Squash } from "hamburger-react";
+import { Link } from "react-router-dom";
 
 const navlinks = [
   { href: "", text: "Agent Information" },
@@ -20,23 +21,31 @@ const Navbar = () => {
       </div>
 
       <ul className={`nav-link-container ${navOpen && "open"}`}>
-        {navlinks.map((link) => {
+        {navlinks.map((link, index) => {
           return (
-            <li className="nav-link">
+            <li className="nav-link" key={index}>
               <a href={link.href}>{link.text}</a>
             </li>
           );
         })}
         <div className="links-button">
-          <OutlineButton text={"Sign in"} />
+          <Link to={"/"}>
+            <OutlineButton text={"Sign in"} />
+          </Link>
 
-          <MainButton text={"Sign up"} />
+          <Link to={"/sign-up"}>
+            <MainButton text={"Sign up"} />
+          </Link>
         </div>
       </ul>
       <div className="buttons-container">
-        <OutlineButton text={"Sign in"} />
+        <Link to={"/"}>
+          <OutlineButton text={"Sign in"} />
+        </Link>
 
-        <MainButton text={"Sign up"} />
+        <Link to={"/sign-up"}>
+          <MainButton text={"Sign up"} />
+        </Link>
       </div>
       <div className="menu">
         <Squash toggle={setNavOpen} toggled={navOpen} size={24} />

@@ -1,7 +1,11 @@
 import React from "react";
 import "../../styles/Button.css";
 const MainButton = ({ text }) => {
-  return <button className="main-button">{text}</button>;
+  return (
+    <Link>
+      <button className="main-button">{text}</button>
+    </Link>
+  );
 };
 
 const OutlineButton = ({ text }) => {
