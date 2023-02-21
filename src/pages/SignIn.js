@@ -1,31 +1,40 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-
+import { auth, provider } from "./config";
+import { signInWithPopup } from "firebase/auth";
 import "../styles/SignIn.css";
 import { Link } from "react-router-dom";
 import { Icon } from "react-icons-kit";
 import { eyeOff } from "react-icons-kit/feather/eyeOff";
 import { eye } from "react-icons-kit/feather/eye";
+import Home from "./Home";
 //images
 import google from "../images/google.png";
 import img from "../images/SignImg.png";
 
-const SignIn = ({ setUser }) => {
-  const navigate = useNavigate();
-
+const SignIn = () => {
   const [type, setType] = useState("password");
   const [icon, setIcon] = useState(eyeOff);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
+  const [value, setValue] = useState("");
+  let item = email.length && password.length;
 
   const handleClick = async (e) => {
-    e.preventDefault();
-    if (!email || !password) {
-      return;
-    }
-    setUser({ email: email, password: password });
-    navigate("/home");
+    let item = { email, password };
+
+    let response = await fetch("http://localhost:3001/api/v1/users/login", {
+      method: "POST",
+      body: JSON.stringify(item),
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
+    response = await response.json();
+    console.log(response);
+    localStorage.setItem("user-info", JSON.stringify(response));
   };
 
   const handleToggle = () => {
@@ -37,6 +46,15 @@ const SignIn = ({ setUser }) => {
       setType("password");
     }
   };
+  const handleSignIn = () => {
+    signInWithPopup(auth, provider).then((data) => {
+      setValue(data.user.email);
+      localStorage.setItem("email", data.user.email);
+    });
+  };
+  useEffect(() => {
+    setValue(localStorage.getItem("email"));
+  });
   return (
     <div className="signIn-container">
       <div className="signIn-img">
@@ -48,7 +66,6 @@ const SignIn = ({ setUser }) => {
           <p className="form-Text">We're always excited to have you back</p>
         </div>
         <form className="signIn-form">
-
           <input
             type="email"
             placeholder="Email address"
@@ -57,13 +74,13 @@ const SignIn = ({ setUser }) => {
             onChange={(e) => setEmail(e.target.value)}
           />
 
-
           <div className="password-form">
             <input
               type={type}
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              required
             />
             <span onClick={handleToggle}>
               <Icon icon={icon}></Icon>
@@ -77,14 +94,23 @@ const SignIn = ({ setUser }) => {
 
           <div className="form-button-container">
             <div>
-              <button onClick={handleClick}>Sign In</button>
+              <Link to="/home">
+                <button
+                  disabled={item == 0 ? true : false}
+                  onClick={handleClick}
+                >
+                  Sign In
+                </button>
+              </Link>
             </div>
             <div>
               <p>or sign in with </p>
             </div>
-            <div className="google">
-              <img src={google} alt="" />
-            </div>
+          
+              <div className="google" onClick={handleSignIn}>
+                <img src={google} alt="" />
+              </div>
+            
           </div>
         </form>
         <div className="Sign-account">
